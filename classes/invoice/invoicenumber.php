@@ -26,6 +26,8 @@
 namespace local_shopping_cart\invoice;
 
 use core\event\base;
+use core\exception\moodle_exception;
+use moodle_url;
 
 /**
  * Class invoice. To handle task linked to managing the invoice numbers.
@@ -62,15 +64,17 @@ class invoicenumber {
             $params = [];
         }
 
-        $sql = "SELECT COALESCE(MAX(invoiceid), '0') AS highestinvoiceid
+        $sql = "SELECT invoiceid
                 FROM {local_shopping_cart_invoices}
-                $where";
+                $where
+                ORDER BY LENGTH(invoiceid) DESC, invoiceid DESC
+                LIMIT 1";
 
-        $highestinvoiceid = $DB->get_field_sql($sql, $params);
+        $highestinvoiceid = $DB->get_field_sql($sql, $params) ?: '0';
         [$highestprefix, $highestnumber] = self::return_prefix_and_number($highestinvoiceid);
 
         if ($highestnumber < $number) {
-            $highestnumber = $number;
+            $highestnumber = $number + 1;
         } else {
             $highestnumber++;
         }
@@ -106,7 +110,19 @@ class invoicenumber {
         }
         $number = empty($matches[2]) ? 0 : $matches[2];
 
-        return [$prefix ?? '', $number];
+        if (!is_number($number)) {
+            throw new moodle_exception(
+                "Invoice number is not valid. You need to fix the setting 'startinvoicenumber' of local_shopping_cart.",
+                'local_shopping_cart',
+                new moodle_url(
+                    '/admin/category.php',
+                    ['category' => 'local_shopping_cart'],
+                    'admin-startinvoicenumber'
+                ),
+            );
+        }
+
+        return [$prefix ?? '', (int)$number];
     }
 
     /**

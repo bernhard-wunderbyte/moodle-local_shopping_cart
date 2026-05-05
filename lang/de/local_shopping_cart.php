@@ -639,7 +639,7 @@ $string['showvatnrcheckerdescription'] = "Aktiviert die Eingabe und Überprüfun
 $string['si'] = "Slowenien";
 $string['sk'] = "Slowakei";
 $string['startinvoicenumber'] = "Mit dieser Nummer beginnt der Rechnungskreislauf";
-$string['startinvoicenumber_desc'] = "Sie können einen Prefix eingeben. Es muss allerdings auch eine Zahl enthalten sein";
+$string['startinvoicenumber_desc'] = "Sie können einen Präfix eingeben. Es muss allerdings auch eine Zahl enthalten sein. Beispiel: INV-100000 => Erste Rechnung hat die Nummer INV-100001, zweite Rechnung INV-100002, ...";
 $string['startinvoicingdate'] = 'Mit dem folgenden Datum beginnen Sie mit der Rechnungsstellung';
 $string['startinvoicingdatedesc'] = 'Geben Sie einen Unix Timestamp für den Zeitpunkt ein, ab dem Sie Rechnungen generieren wollen.
  Kopieren Sie ihn von dort: https://www.unixtimestamp.com/';

@@ -703,7 +703,8 @@ $string['showvatnrcheckerdescription'] = "Activates input and verification of a 
 $string['si'] = "Slovenia";
 $string['sk'] = "Slovakia";
 $string['startinvoicenumber'] = "Number to start the invoice numbers";
-$string['startinvoicenumber_desc'] = "You can use prefixes, but there needs to be at number, which then will be increased";
+$string['startinvoicenumber_desc'] = "You can use prefixes, but there needs to be a number, which then will be increased.
+Example: If you set this value to INV-100000, the first invoice will have the number INV-100001, next one INV-100002 and so on.";
 $string['startinvoicingdate'] = 'Enter a date from which you want to start generating invoices';
 $string['startinvoicingdatedesc'] = 'In order to prevent invoice creation from invoices in the past
  enter a UNIX timestamp for starting date to issue invoices. Get it from there: https://www.unixtimestamp.com/';
